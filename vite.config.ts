@@ -20,7 +20,13 @@ export default ({ mode }: ConfigEnv) => {
     base: ENV.VITE_BASE_URL,
     server: {
       host: "localhost",
-      port: 3001
+      port: 3001,
+      proxy: {
+        "/files": {
+          target: "http://8.148.23.19:10086",
+          changeOrigin: true
+        }
+      }
     },
     define: {
       "process.env": {
@@ -92,6 +98,7 @@ export default ({ mode }: ConfigEnv) => {
       // 默认情况下 若 outDir 在 root 目录下， 则 Vite 会在构建时清空该目录。
       emptyOutDir: true
     },
+
     plugins: [
       vue(),
       eslintPlugin({ cache: false }),
